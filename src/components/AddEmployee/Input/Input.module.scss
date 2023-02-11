@@ -1,0 +1,22 @@
+.label {
+  display: block;
+  margin-top: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+* {
+  + .err-message {
+    color: red;
+    display: none;
+  }
+  &[data-invalid='true'] {
+    outline-width: thin;
+    outline-style: solid;
+    outline-color: red;
+    border: 1px solid red;
+    border-radius: 1px;
+    + .err-message {
+      display: block;
+    }
+  }
+}
