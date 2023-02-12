@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { GLOBAL_TITLE } from '../utils/globals';
-import styles from './AddEmployee.module.scss';
 import globalStyles from '../App.module.scss';
 import { Link } from 'react-router-dom';
 import Title from '../components/AddEmployee/Title/Title';
@@ -15,10 +14,10 @@ const AddEmployee = () => {
     <React.Fragment>
       <Title />
       <div className={globalStyles.container}>
-        <Link className={styles.link} to={'/employee-list'}>
+        <Link className={globalStyles.link} to={'/employee-list'}>
           View Current Employees
         </Link>
-        <h2 className={styles.subtitle}>Create Employee</h2>
+        <h2 className={globalStyles.subtitle}>Create Employee</h2>
         <AddForm />
       </div>
     </React.Fragment>
