@@ -1,9 +1,9 @@
 import styles from './AddForm.module.scss';
 import Input from '../Input/Input';
 import AddressFieldSet from './AddressFieldSet/AddressFieldSet';
-import { DEPARTMENTS } from '../../../utils/globals';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee } from '../../../store/slice/employee';
+import { DEPARTMENTS } from '../../../utils/globals';
 
 const AddForm = () => {
   const dispatch = useDispatch();
@@ -16,16 +16,27 @@ const AddForm = () => {
       .flatMap(input =>
         input.tagName === 'FIELDSET'
           ? Array.from(input)
-          : { [input.name]: input.value }
+          : input.tagName === 'DIV'
+          ? input.querySelector('input')
+          : input.name
+          ? { [input.name]: input.value }
+          : {}
       );
-
     const employee = values.reduce((merge, values) => {
       return { ...merge, ...values };
     }, {});
+
     let invalid = false;
     for (const [key, value] of Object.entries(employee)) {
       if (!value) invalid = true;
-      document.querySelector(`*[name="${key}"]`).dataset.invalid = !value;
+      const input = document.querySelector(`*[name="${key}"]`);
+      input.dataset.invalid = !value;
+      if (input.dataset.type === 'select') {
+        const dropdown = input.closest('.react-dropdown-select');
+        const wrapper = dropdown.parentElement;
+        dropdown.dataset.invalid = !value;
+        wrapper.dataset.invalid = !value;
+      }
     }
 
     if (invalid) return;
@@ -61,13 +72,13 @@ const AddForm = () => {
         errorMessage="Please provide a valid date."
       />
       <AddressFieldSet />
-      <Input id="department" type="select" title="Department">
-        {DEPARTMENTS.map((dep, index) => (
-          <option key={index} value={index}>
-            {dep}
-          </option>
-        ))}
-      </Input>
+      <Input
+        id="department"
+        type="select"
+        title="Department"
+        errorMessage="Please select a department."
+        options={DEPARTMENTS}
+      />
       <div className={styles.submit}>
         <button type="submit">Save</button>
       </div>

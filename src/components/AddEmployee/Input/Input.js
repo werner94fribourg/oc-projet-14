@@ -1,6 +1,7 @@
 import { InputDate } from '@werner94fribourg/datepicker';
 import React from 'react';
 import styles from './Input.module.scss';
+import Select from './Select/Select';
 
 const Input = props => {
   const { id, title, type, errorMessage } = props;
@@ -24,27 +25,23 @@ const Input = props => {
       input = <InputDate name={id} {...propsCopy} />;
       break;
     case 'select':
-      input = (
-        <select name={id} {...propsCopy}>
-          {props.children}
-        </select>
-      );
+      input = <Select name={id} {...propsCopy} />;
       break;
     default:
       input = (
-        <input name={id} type={type} onBlur={blurHandler} {...propsCopy} />
+        <input name={id} onBlur={blurHandler} type={type} {...propsCopy} />
       );
       break;
   }
 
   return (
-    <React.Fragment>
+    <div>
       <label className={styles.label} htmlFor={id}>
         {title}
       </label>
       {input}
       <div className={styles['err-message']}>{errorMessage}</div>
-    </React.Fragment>
+    </div>
   );
 };
 

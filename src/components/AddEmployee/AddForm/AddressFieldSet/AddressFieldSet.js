@@ -18,13 +18,13 @@ const AddressFieldSet = () => {
         title="City"
         errorMessage="Please provide a valid city."
       />
-      <Input id="state" type="select" title="State">
-        {Object.entries(STATES).map(([key, value]) => (
-          <option key={key} value={key}>
-            {value}
-          </option>
-        ))}
-      </Input>
+      <Input
+        id="state"
+        type="select"
+        title="State"
+        errorMessage="Please select a state."
+        options={STATES}
+      />
       <Input
         id="zipCode"
         type="number"
