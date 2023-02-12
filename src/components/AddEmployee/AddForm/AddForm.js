@@ -4,8 +4,18 @@ import AddressFieldSet from './AddressFieldSet/AddressFieldSet';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee } from '../../../store/slice/employee';
 import { DEPARTMENTS } from '../../../utils/globals';
+import SubmitModal from '../../UI/Modal';
+import { useState } from 'react';
 
 const AddForm = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const dispatch = useDispatch();
   const employees = useSelector(state => state.employees.employees);
 
@@ -58,6 +68,7 @@ const AddForm = () => {
     setTimeout(() => {
       document.querySelector('body').click();
     }, 1);
+    handleOpen();
   };
 
   return (
@@ -97,6 +108,7 @@ const AddForm = () => {
       <div className={styles.submit}>
         <button type="submit">Save</button>
       </div>
+      <SubmitModal open={open} handleClose={handleClose} />
     </form>
   );
 };
