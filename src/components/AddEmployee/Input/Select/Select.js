@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import DropdownSelect from 'react-dropdown-select';
 
 const Select = props => {
   const { name, options } = props;
 
-  const changeHandler = data => {
+  const changeHandler = value => {
     const input = document.querySelector(`input[name=${name}]`);
 
     if (input.dataset.invalid === undefined) return;
@@ -23,13 +23,18 @@ const Select = props => {
 
     input.dataset.type = 'select';
   }, [name]);
+
   return (
-    <DropdownSelect
-      name={name}
-      options={options}
-      values={[]}
-      onChange={changeHandler}
-    />
+    <React.Fragment>
+      <button className="remove-btn" style={{ display: 'none' }}></button>
+      <DropdownSelect
+        clearable
+        name={name}
+        options={options}
+        values={[]}
+        onChange={changeHandler}
+      />
+    </React.Fragment>
   );
 };
 

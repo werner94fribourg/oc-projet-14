@@ -43,6 +43,21 @@ const AddForm = () => {
 
     addEmployee(employee, dispatch);
     localStorage.setItem('employees', JSON.stringify([...employees, employee]));
+
+    document.querySelectorAll('*[data-invalid="false"]').forEach(input => {
+      input.removeAttribute('data-invalid');
+      if (input.dataset.type !== 'select') {
+        input.value = '';
+      }
+    });
+
+    document.querySelectorAll('.react-dropdown-select-clear').forEach(input => {
+      input.click();
+    });
+
+    setTimeout(() => {
+      document.querySelector('body').click();
+    }, 1);
   };
 
   return (
