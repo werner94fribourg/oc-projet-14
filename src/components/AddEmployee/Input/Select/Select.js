@@ -4,7 +4,7 @@ import DropdownSelect from 'react-dropdown-select';
 const Select = props => {
   const { name, options } = props;
 
-  const changeHandler = value => {
+  const changeHandler = () => {
     const input = document.querySelector(`input[name=${name}]`);
 
     if (input.dataset.invalid === undefined) return;

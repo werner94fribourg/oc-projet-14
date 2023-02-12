@@ -8,8 +8,6 @@ export const DEPARTMENTS = [
   { label: 'Legal', value: 'Legal' },
 ];
 
-export const SELECTED_DEPARTMENT = [];
-
 export const STATES = [
   { label: 'Alabama', value: 'AL' },
   { label: 'Alaska', value: 'AK' },
@@ -72,4 +70,26 @@ export const STATES = [
   { label: 'Wyoming', value: 'WY' },
 ];
 
-export const SELECTED_STATE = [];
+export const EMPLOYEE_FIELDS = [
+  'First Name',
+  'Last Name',
+  'Birth Date',
+  'Start Date',
+  'Street',
+  'City',
+  'State',
+  'Zip Code',
+  'Department',
+];
+
+export const EMPLOYEES_KEYS = [
+  'firstName',
+  'lastName',
+  'birthDate',
+  'startDate',
+  'street',
+  'city',
+  'state',
+  'zipCode',
+  'department',
+];

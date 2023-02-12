@@ -6,14 +6,22 @@ import { addEmployee } from '../../../store/slice/employee';
 import { DEPARTMENTS } from '../../../utils/globals';
 import SubmitModal from '../../UI/Modal';
 import { useState } from 'react';
+import {
+  emptyFieldValues,
+  getAllFieldsValues,
+  getEmployeeData,
+  validateAllFields,
+} from '../../../utils/helpers';
 
 const AddForm = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
   };
 
   const dispatch = useDispatch();
@@ -21,54 +29,20 @@ const AddForm = () => {
 
   const saveEmployeeHandler = event => {
     event.preventDefault();
-    const values = Array.from(event.target.elements)
-      .filter(input => input.tagName !== 'BUTTON')
-      .flatMap(input =>
-        input.tagName === 'FIELDSET'
-          ? Array.from(input)
-          : input.tagName === 'DIV'
-          ? input.querySelector('input')
-          : input.name
-          ? { [input.name]: input.value }
-          : {}
-      );
-    const employee = values.reduce((merge, values) => {
-      return { ...merge, ...values };
-    }, {});
 
-    let invalid = false;
-    for (const [key, value] of Object.entries(employee)) {
-      if (!value) invalid = true;
-      const input = document.querySelector(`*[name="${key}"]`);
-      input.dataset.invalid = !value;
-      if (input.dataset.type === 'select') {
-        const dropdown = input.closest('.react-dropdown-select');
-        const wrapper = dropdown.parentElement;
-        dropdown.dataset.invalid = !value;
-        wrapper.dataset.invalid = !value;
-      }
-    }
+    const values = getAllFieldsValues(Array.from(event.target.elements));
+    const employee = getEmployeeData(values);
+
+    const invalid = validateAllFields(employee);
 
     if (invalid) return;
 
     addEmployee(employee, dispatch);
     localStorage.setItem('employees', JSON.stringify([...employees, employee]));
 
-    document.querySelectorAll('*[data-invalid="false"]').forEach(input => {
-      input.removeAttribute('data-invalid');
-      if (input.dataset.type !== 'select') {
-        input.value = '';
-      }
-    });
+    emptyFieldValues();
 
-    document.querySelectorAll('.react-dropdown-select-clear').forEach(input => {
-      input.click();
-    });
-
-    setTimeout(() => {
-      document.querySelector('body').click();
-    }, 1);
-    handleOpen();
+    handleOpenModal();
   };
 
   return (
@@ -108,7 +82,7 @@ const AddForm = () => {
       <div className={styles.submit}>
         <button type="submit">Save</button>
       </div>
-      <SubmitModal open={open} handleClose={handleClose} />
+      <SubmitModal open={openModal} handleClose={handleCloseModal} />
     </form>
   );
 };

@@ -4,14 +4,12 @@ import styles from './Input.module.scss';
 import Select from './Select/Select';
 
 const Input = props => {
-  const { id, title, type, errorMessage, inputStyles, labelStyles } = props;
+  const { id, title, type, errorMessage } = props;
   const propsCopy = { ...props };
   delete propsCopy['id'];
   delete propsCopy['title'];
   delete propsCopy['type'];
   delete propsCopy['errorMessage'];
-  delete propsCopy['inputStyles'];
-  delete propsCopy['labelStyles'];
 
   const blurHandler = event => {
     const { target } = event;
@@ -37,8 +35,8 @@ const Input = props => {
   }
 
   return (
-    <div style={inputStyles}>
-      <label className={styles.label} style={labelStyles} htmlFor={id}>
+    <div>
+      <label className={styles.label} htmlFor={id}>
         {title}
       </label>
       {input}
