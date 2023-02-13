@@ -2,6 +2,12 @@ import { STATES } from '../../../../utils/globals';
 import Input from '../../Input/Input';
 import styles from './AddressFieldSet.module.scss';
 
+/**
+ * Component representing the fieldset for all addresses' inputs in the form.
+ *
+ * @version 1.0.0
+ * @author [Werner Schmid](https://github.com/werner94fribourg)
+ */
 const AddressFieldSet = () => {
   return (
     <fieldset className={styles.address}>
@@ -34,5 +40,7 @@ const AddressFieldSet = () => {
     </fieldset>
   );
 };
+
+AddressFieldSet.propTypes = {};
 
 export default AddressFieldSet;

@@ -1,18 +1,24 @@
-import styles from './AddForm.module.scss';
-import Input from '../Input/Input';
-import AddressFieldSet from './AddressFieldSet/AddressFieldSet';
-import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee } from '../../../store/slice/employee';
 import { DEPARTMENTS } from '../../../utils/globals';
-import SubmitModal from '../../UI/Modal';
-import { useState } from 'react';
 import {
   emptyFieldValues,
   getAllFieldsValues,
   getEmployeeData,
   validateAllFields,
 } from '../../../utils/helpers';
+import SubmitModal from '../../UI/Modal';
+import Input from '../Input/Input';
+import styles from './AddForm.module.scss';
+import AddressFieldSet from './AddressFieldSet/AddressFieldSet';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+/**
+ * Component representing the employee's submission form in the home page.
+ *
+ * @version 1.0.0
+ * @author [Werner Schmid](https://github.com/werner94fribourg)
+ */
 const AddForm = () => {
   const [openModal, setOpenModal] = useState(false);
 
@@ -86,5 +92,7 @@ const AddForm = () => {
     </form>
   );
 };
+
+AddForm.propTypes = {};
 
 export default AddForm;

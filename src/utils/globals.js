@@ -1,5 +1,16 @@
+/**
+ * Store of all global parameters used in the application.
+ * @module globals
+ */
+
+/**
+ * Global title of the application.
+ */
 export const GLOBAL_TITLE = 'HRnet';
 
+/**
+ * Array of existing departments that the user can select.
+ */
 export const DEPARTMENTS = [
   { label: 'Sales', value: 'Sales' },
   { label: 'Marketing', value: 'Marketing' },
@@ -8,6 +19,9 @@ export const DEPARTMENTS = [
   { label: 'Legal', value: 'Legal' },
 ];
 
+/**
+ * Array of existing states that the user can select.
+ */
 export const STATES = [
   { label: 'Alabama', value: 'AL' },
   { label: 'Alaska', value: 'AK' },
@@ -70,6 +84,9 @@ export const STATES = [
   { label: 'Wyoming', value: 'WY' },
 ];
 
+/**
+ * Array of existing labels for the employee's fields.
+ */
 export const EMPLOYEE_FIELDS = [
   'First Name',
   'Last Name',
@@ -82,6 +99,9 @@ export const EMPLOYEE_FIELDS = [
   'Department',
 ];
 
+/**
+ * Array of existing keys for an employee object.
+ */
 export const EMPLOYEES_KEYS = [
   'firstName',
   'lastName',

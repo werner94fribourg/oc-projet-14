@@ -1,31 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import { filterEmployees } from '../../../store/slice/employee';
+import { getArrayCopy, sortEmployeeArray } from '../../../utils/helpers';
+import Input from '../../AddEmployee/Input/Input';
+import Head from '../TableHead/TableHead';
+import styles from './EmployeeTable.module.scss';
+import TableData from './TableData/TableData';
+import { TablePagination } from '@mui/material';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
-import Paper from '@mui/material/Paper';
-import { useSelector } from 'react-redux';
-import { TablePagination } from '@mui/material';
-import Input from '../../AddEmployee/Input/Input';
-import { getArrayCopy, sortEmployeeArray } from '../../../utils/helpers';
-import styles from './EmployeeTable.module.scss';
-import Head from '../TableHead/TableHead';
-import TableData from './TableData/TableData';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+/**
+ * styles associated with the table wrapper
+ */
 const paperStyles = { width: '90%', marginTop: '10px', marginBottom: '10px' };
 
+/**
+ * Component rendering the table of existing users in the application.
+ *
+ * @version 1.0.0
+ * @author [Werner Schmid](https://github.com/werner94fribourg)
+ */
 const EmployeeTable = () => {
-  const employees = useSelector(state => state.employees.employees);
-
-  const employeesCopy = getArrayCopy(employees);
+  const filteredEmployees = useSelector(
+    state => state.employees.filteredEmployees
+  );
+  const dispatch = useDispatch();
 
   const [selectedField, setSelectedField] = useState(-1);
   const [ascending, setAscending] = useState(true);
   const [page, setPage] = useState(0);
+  const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [rows, setRows] = useState(employeesCopy);
 
   useEffect(() => {
-    const employeesCopy = getArrayCopy(employees);
+    const employeesCopy = getArrayCopy(filteredEmployees);
     if (selectedField !== -1) {
       const sortedArray = sortEmployeeArray(
         employeesCopy,
@@ -34,13 +45,10 @@ const EmployeeTable = () => {
       );
       setRows(sortedArray);
     } else setRows(employeesCopy);
-  }, [employees, selectedField, ascending]);
+  }, [filteredEmployees, selectedField, ascending]);
 
   const requestSearch = searchedVal => {
-    const filteredRows = employeesCopy.filter(row => {
-      return row.firstName.toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    setRows(filteredRows);
+    filterEmployees(searchedVal, dispatch);
   };
 
   const searchHandler = event => {
@@ -102,5 +110,7 @@ const EmployeeTable = () => {
     </React.Fragment>
   );
 };
+
+EmployeeTable.propTypes = {};
 
 export default EmployeeTable;

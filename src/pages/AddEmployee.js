@@ -1,10 +1,16 @@
-import React, { useEffect } from 'react';
-import { GLOBAL_TITLE } from '../utils/globals';
 import globalStyles from '../App.module.scss';
-import { Link } from 'react-router-dom';
-import Title from '../components/AddEmployee/Title/Title';
 import AddForm from '../components/AddEmployee/AddForm/AddForm';
+import Title from '../components/AddEmployee/Title/Title';
+import { GLOBAL_TITLE } from '../utils/globals';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
+/**
+ * The root component rendered when the user navigates to the home page, containing the submission form.
+ *
+ * @version 1.0.0
+ * @author [Werner Schmid](https://github.com/werner94fribourg)
+ */
 const AddEmployee = () => {
   useEffect(() => {
     document.title = GLOBAL_TITLE;
@@ -23,5 +29,7 @@ const AddEmployee = () => {
     </React.Fragment>
   );
 };
+
+AddEmployee.propTypes = {};
 
 export default AddEmployee;
