@@ -6,13 +6,14 @@ import {
   getEmployeeData,
   validateAllFields,
 } from '../../../utils/helpers';
-import SubmitModal from '../../UI/Modal';
 import Input from '../Input/Input';
 import styles from './AddForm.module.scss';
 import AddressFieldSet from './AddressFieldSet/AddressFieldSet';
+import loadable from '@loadable/component';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+const SubmitModal = loadable(() => import('../../UI/Modal'));
 /**
  * Component representing the employee's submission form in the home page.
  *

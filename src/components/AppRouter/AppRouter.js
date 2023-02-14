@@ -1,7 +1,8 @@
-import AddEmployee from '../../pages/AddEmployee';
-import EmployeeList from '../../pages/EmployeeList';
+import loadable from '@loadable/component';
 import { Navigate, Route, Routes } from 'react-router';
 
+const AddEmployee = loadable(() => import('../../pages/AddEmployee'));
+const EmployeeList = loadable(() => import('../../pages/EmployeeList'));
 /**
  * The router of the application.
  *
