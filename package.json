@@ -38,8 +38,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docs": "styleguidist build --config config/styleguidist.config.js",
-    "audit:react": "cd performances && lighthouse http://localhost:3000 --only-categories=performance --view --output json --output-path=./react-report.json",
-    "audit:jquery": "cd performances &&lighthouse http://localhost:8081/ --only-categories=performance --view --output json --output-path=./jquery-report.json"
+    "audit:react": "cd performances && lighthouse http://localhost:3000 --only-categories=performance --view --output json --output-path=./react-report.json -GA",
+    "audit:jquery": "cd performances && lighthouse http://localhost:8081/ --only-categories=performance --view --output json --output-path=./jquery-report.json -GA"
   },
   "eslintConfig": {
     "extends": [
@@ -60,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@sitespeed.io/throttle": "^5.0.0",
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "lighthouse": "^10.0.0",
     "react-styleguidist": "^13.0.0"
