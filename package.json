@@ -15,7 +15,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@werner94fribourg/datepicker": "^1.0.2",
+    "@werner94fribourg/datepicker": "^1.0.0",
     "framer-motion": "^9.0.2",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
@@ -36,7 +36,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docs": "styleguidist build --config config/styleguidist.config.js"
+    "docs": "styleguidist build --config config/styleguidist.config.js",
+    "audit:react": "cd performances && lighthouse http://localhost:3000 --only-categories=performance --view --output json --output-path=./react-report.json",
+    "audit:jquery": "cd performances &&lighthouse http://localhost:8081/ --only-categories=performance --view --output json --output-path=./jquery-report.json"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +60,7 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
+    "lighthouse": "^10.0.0",
     "react-styleguidist": "^13.0.0"
   }
 }
