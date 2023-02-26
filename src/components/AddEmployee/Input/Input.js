@@ -1,9 +1,9 @@
 import styles from './Input.module.scss';
 import Select from './Select/Select';
-import { InputDate } from '@werner94fribourg/datepicker';
 import _uniqueId from 'lodash/uniqueId';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { InputDate } from 'werner94fribourg-datepicker';
 
 /**
  * Component representing an input and its associated label.
