@@ -2,9 +2,9 @@
  * Slice of the employee in the redux store, containing its actions and reducer.
  * @module employee-slice
  */
-import { setFilteredEmployees } from '../../utils/helpers';
-import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuid } from 'uuid';
+import { setFilteredEmployees } from "../../utils/helpers";
+import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuid } from "uuid";
 
 /**
  * @typedef EmployeeState - the state of an employee in the store
@@ -18,7 +18,7 @@ import { v4 as uuid } from 'uuid';
 const initialState = {
   employees: [],
   filteredEmployees: [],
-  filterPattern: '',
+  filterPattern: "",
 };
 
 /**
@@ -26,7 +26,7 @@ const initialState = {
  * @type {Slice<EmployeeState>}
  */
 const employeeSlice = createSlice({
-  name: 'employees',
+  name: "employees",
   initialState,
   reducers: {
     getAllEmployees(state, action) {
@@ -50,19 +50,7 @@ const employeeSlice = createSlice({
     },
     filterEmployees(state, action) {
       const pattern = action.payload;
-      if (
-        state.filterPattern !== 0 &&
-        state.filterPattern.slice(0, -1) === pattern
-      )
-        state.filteredEmployees = setFilteredEmployees(
-          state.filteredEmployees,
-          pattern
-        );
-      else
-        state.filteredEmployees = setFilteredEmployees(
-          state.employees,
-          pattern
-        );
+      state.filteredEmployees = setFilteredEmployees(state.employees, pattern);
       state.pattern = pattern;
     },
   },
@@ -77,8 +65,8 @@ const employeeActions = employeeSlice.actions;
  * Function used to retrieve all the employee datas from the local storage and register it in the store.
  * @param {Function} dispatch the dispatcher function used to modify the store
  */
-export const getAllEmployees = dispatch => {
-  const employees = JSON.parse(localStorage.getItem('employees'));
+export const getAllEmployees = (dispatch) => {
+  const employees = JSON.parse(localStorage.getItem("employees"));
 
   if (employees) dispatch(employeeActions.getAllEmployees(employees));
 };
